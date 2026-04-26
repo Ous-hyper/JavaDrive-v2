@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Reserva</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: Reserva (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Reserva</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.temporal.ChronoUnit;
+&nbsp;
+&nbsp;public class Reserva {
+&nbsp;
+<b class="nc">&nbsp;    private static int nextId = 1;</b>
+&nbsp;    private int idReserva;
+&nbsp;    private Cliente cliente;
+&nbsp;    private Vehiculo vehiculo;
+&nbsp;    private LocalDate fechaInicio;
+&nbsp;    private LocalDate fechaFin;
+<b class="nc">&nbsp;    public Reserva(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio, LocalDate fechaFin) {</b>
+<b class="nc">&nbsp;        this.idReserva = nextId++;</b>
+<b class="nc">&nbsp;        this.cliente = cliente;</b>
+<b class="nc">&nbsp;        this.vehiculo = vehiculo;</b>
+<b class="nc">&nbsp;        this.fechaInicio = fechaInicio;</b>
+<b class="nc">&nbsp;        this.fechaFin = fechaFin;</b>
+&nbsp;    }
+&nbsp;    public static void setNextId(int next) {
+<b class="nc">&nbsp;        if (next &gt; 0) {</b>
+<b class="nc">&nbsp;            nextId = next;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public String GenerarLineaTicket(){
+<b class="nc">&nbsp;        long totalDias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);</b>
+<b class="nc">&nbsp;        return</b>
+&nbsp;                &quot;============================================&quot;+&quot;\n&quot;+
+&nbsp;                        &quot; CONTRATO DE ALQUILER - JAVADRIVE&quot;+&quot;\n&quot;+
+&nbsp;                        &quot;============================================&quot;+&quot;\n&quot;+
+&nbsp;                        &quot;ID RESERVA: &quot;+idReserva+&quot;\n&quot;+
+&nbsp;                        &quot;FECHA EMISIÓN: &quot;+fechaInicio+&quot;\n&quot;+
+&nbsp;                        &quot;--------------------------------------------&quot;+&quot;\n&quot;+
+&nbsp;                        &quot;DATOS DEL CLIENTE:&quot;+&quot;\n&quot;+
+<b class="nc">&nbsp;                        &quot;Nombre: &quot;+ cliente.getNombre()+&quot;\n&quot;+</b>
+<b class="nc">&nbsp;                        &quot;DNI: &quot;+ cliente.getDni()+&quot;\n&quot;+</b>
+<b class="nc">&nbsp;                        &quot;Teléfono: &quot;+cliente.getTelefono()+&quot;\n&quot;+</b>
+&nbsp;                        &quot;--------------------------------------------&quot;+&quot;\n&quot;+
+&nbsp;                        &quot;DATOS DEL VEHÍCULO: &quot;+&quot;\n&quot;+
+<b class="nc">&nbsp;                        &quot;Marca y Modelo: &quot;+vehiculo.getMarca()+&quot; &quot;+vehiculo.getModelo()+&quot;\n&quot;+</b>
+<b class="nc">&nbsp;                        &quot;Matrícula: &quot;+vehiculo.getMatricula()+&quot;\n&quot;+</b>
+<b class="nc">&nbsp;                        &quot;\nDetalles: &quot; +vehiculo.obtenerDetalles()+</b>
+&nbsp;                        &quot;--------------------------------------------&quot;+&quot;\n&quot;+
+&nbsp;                        &quot;PERIODO DE ALQUILER: &quot;+&quot;\n&quot;+
+&nbsp;                        &quot;Fecha de recogida: &quot;+fechaInicio+&quot;\n&quot;+
+&nbsp;                        &quot;Fecha de devolución: &quot;+fechaFin+&quot;\n&quot;+
+&nbsp;                        &quot;Total días: &quot;+totalDias+&quot;\n&quot;+
+&nbsp;                        &quot;--------------------------------------------&quot;+&quot;\n&quot;+
+&nbsp;                        &quot;ESTADO: Confirmado y Pendiente de pago&quot;;
+&nbsp;    }
+&nbsp;    public int getIdReserva() {
+<b class="nc">&nbsp;        return idReserva;</b>
+&nbsp;    }
+&nbsp;    public void setIdReserva(int idReserva) {
+<b class="nc">&nbsp;        this.idReserva = idReserva;</b>
+&nbsp;    }
+&nbsp;    public Cliente getCliente() {
+<b class="nc">&nbsp;        return cliente;</b>
+&nbsp;    }
+&nbsp;    public void setCliente(Cliente cliente) {
+<b class="nc">&nbsp;        this.cliente = cliente;</b>
+&nbsp;    }
+&nbsp;    public Vehiculo getVehiculo() {
+<b class="nc">&nbsp;        return vehiculo;</b>
+&nbsp;    }
+&nbsp;    public void setVehiculo(Vehiculo vehiculo) {
+<b class="nc">&nbsp;        this.vehiculo = vehiculo;</b>
+&nbsp;    }
+&nbsp;    public LocalDate getFechaInicio() {
+<b class="nc">&nbsp;        return fechaInicio;</b>
+&nbsp;    }
+&nbsp;    public void setFechaInicio(LocalDate fechaInicio) {
+<b class="nc">&nbsp;        this.fechaInicio = fechaInicio;</b>
+&nbsp;    }
+&nbsp;    public LocalDate getFechaFin() {
+<b class="nc">&nbsp;        return fechaFin;</b>
+&nbsp;    }
+&nbsp;    public void setFechaFin(LocalDate fechaFin) {
+<b class="nc">&nbsp;        this.fechaFin = fechaFin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-04-26 19:38</div>
+</div>
+</body>
+</html>

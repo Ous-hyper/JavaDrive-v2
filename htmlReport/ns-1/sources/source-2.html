@@ -1,0 +1,349 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Main</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">app</a>
+</div>
+
+<h1>Coverage Summary for Class: Main (app)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Main</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/116)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package app;
+&nbsp;
+&nbsp;import logica.GestorPersistencia;
+&nbsp;import model.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.*;
+&nbsp;
+<b class="nc">&nbsp;public class Main {</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;    private static List&lt;Vehiculo&gt; flota = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    private static List&lt;Cliente&gt; clientes = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    private static GestorPersistencia gestor = new GestorPersistencia();</b>
+<b class="nc">&nbsp;    private static Scanner sc = new Scanner(System.in);</b>
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+&nbsp;
+<b class="nc">&nbsp;        cargarDatos();</b>
+&nbsp;        int opcion;
+&nbsp;
+&nbsp;        do {
+<b class="nc">&nbsp;            opcion = mostrarMenu();</b>
+<b class="nc">&nbsp;            sc.nextLine();</b>
+<b class="nc">&nbsp;            switch (opcion) {</b>
+&nbsp;                case 1:
+<b class="nc">&nbsp;                    crearCliente();</b>
+&nbsp;                    break;
+&nbsp;                case 2:
+<b class="nc">&nbsp;                    crearVehiculo();</b>
+&nbsp;                    break;
+&nbsp;                case 3:
+<b class="nc">&nbsp;                    listarVehiculosDisponibles();</b>
+&nbsp;                    break;
+&nbsp;                case 4:
+<b class="nc">&nbsp;                    pedirDatosReserva();</b>
+&nbsp;                    break;
+&nbsp;                case 5:
+<b class="nc">&nbsp;                    listarClientes();</b>
+&nbsp;                    break;
+&nbsp;                case 6:
+<b class="nc">&nbsp;                    System.out.println(&quot;Saliendo del programa...&quot;);</b>
+<b class="nc">&nbsp;                    guardarDatos();</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Datos guardados correctamente.&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        } while (opcion != 6);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int mostrarMenu(){
+<b class="nc">&nbsp;        System.out.println(&quot;\n =============== MENU ===============&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;1. Alta Cliente&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;2. Alta Vehiculo&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;3. Listar Vehiculos Disponibles&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;4. Realizar Reserva&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;5. Listar Clientes&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;6. Salir&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;\nElegir una opcion:&quot;);</b>
+<b class="nc">&nbsp;        return sc.nextInt();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void pedirDatosReserva(){
+<b class="nc">&nbsp;        System.out.println(&quot;Ingrese el DNI del cliente:&quot;);</b>
+<b class="nc">&nbsp;        String dni = sc.nextLine();</b>
+<b class="nc">&nbsp;        Cliente c = buscarCliente(dni);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Matrícula del vehículo: &quot;);</b>
+<b class="nc">&nbsp;        String matricula = sc.nextLine();</b>
+<b class="nc">&nbsp;        Vehiculo v = buscarVehiculo(matricula);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (c == null || v == null || !v.isDisponible()) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;ERROR: Cliente no existe o vehículo no disponible.&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            System.out.println(&quot;¿Cuántos días de alquiler?&quot;);</b>
+<b class="nc">&nbsp;            int dias = sc.nextInt();</b>
+<b class="nc">&nbsp;            sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;            realizarReserva(c, v, LocalDate.now(), LocalDate.now().plusDays(dias));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void crearCliente() {
+<b class="nc">&nbsp;        System.out.println(&quot;====ALTA DE NUEVO CLIENTE====&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;DNI: &quot;);</b>
+<b class="nc">&nbsp;        String dni = sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Nombre: &quot;);</b>
+<b class="nc">&nbsp;        String nombre = sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Tlf: &quot;);</b>
+<b class="nc">&nbsp;        String telefono = sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        clientes.add(new Cliente(dni, nombre, telefono));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void crearVehiculo() {
+<b class="nc">&nbsp;        System.out.println(&quot;====ALTA DE NUEVO VEHICULO====&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;¿Coche (C) o Furgoneta (F)?&quot;);</b>
+<b class="nc">&nbsp;        String tipo = sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Introduzca los datos del coche:&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Matricula: &quot;);</b>
+<b class="nc">&nbsp;        String matricula = sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Marca: &quot;);</b>
+<b class="nc">&nbsp;        String marca = sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Modelo: &quot;);</b>
+<b class="nc">&nbsp;        String modelo = sc.nextLine();</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        if (tipo.equalsIgnoreCase(&quot;C&quot;)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                System.out.println(&quot;Tipo de coche (Pequeño, Familiar, Deportivo):&quot;);</b>
+<b class="nc">&nbsp;                String tipoCoche = sc.nextLine();</b>
+<b class="nc">&nbsp;                TipoCoche tipoC = TipoCoche.valueOf(tipoCoche);</b>
+&nbsp;
+<b class="nc">&nbsp;                System.out.println(&quot;Numero de plazas: &quot;);</b>
+<b class="nc">&nbsp;                int numPlazas = Integer.parseInt(sc.nextLine());</b>
+&nbsp;
+<b class="nc">&nbsp;                flota.add(new Coche(matricula, marca, modelo, true, tipoC, numPlazas));</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Coche registrado correctamente.&quot;);</b>
+&nbsp;            } catch (NumPlazasException e) {
+<b class="nc">&nbsp;                System.out.println(&quot;ERROR: &quot; + e.getMessage());</b>
+&nbsp;            } catch (NumberFormatException e) {
+<b class="nc">&nbsp;                System.out.println(&quot;ERROR: debe introducir un dígito&quot;);</b>
+&nbsp;            } catch (IllegalArgumentException e) {
+<b class="nc">&nbsp;                System.out.println(&quot;ERROR: el tipo de coche no existe.&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } else if (tipo.equalsIgnoreCase(&quot;F&quot;)) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                System.out.println(&quot;¿Es de carga? (true/false)&quot;);</b>
+<b class="nc">&nbsp;                boolean esDeCarga = sc.nextBoolean();</b>
+<b class="nc">&nbsp;                sc.nextLine();</b>
+&nbsp;                int cap;
+&nbsp;
+<b class="nc">&nbsp;                if (esDeCarga) {</b>
+<b class="nc">&nbsp;                    System.out.print(&quot;Capacidad en kilos: &quot;);</b>
+<b class="nc">&nbsp;                    cap = sc.nextInt();</b>
+&nbsp;
+&nbsp;                } else {
+<b class="nc">&nbsp;                    System.out.print(&quot;Número de personas (2-7): &quot;);</b>
+<b class="nc">&nbsp;                    cap = sc.nextInt();</b>
+&nbsp;                }
+<b class="nc">&nbsp;                sc.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;                flota.add(new Furgoneta(matricula, marca, modelo, true, esDeCarga, cap));</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Furgoneta registrada correctamente.&quot;);</b>
+&nbsp;            } catch (InputMismatchException e) {
+<b class="nc">&nbsp;                System.out.println(&quot;ERROR: debes introducir el formato correcto (true/false)&quot;);</b>
+<b class="nc">&nbsp;                sc.nextLine();</b>
+&nbsp;            } catch (NumPlazasException e){
+<b class="nc">&nbsp;                System.out.println(&quot;ERROR: &quot; +e.getMessage());</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        } else {
+<b class="nc">&nbsp;            System.out.println(&quot;Opción no válida. Saliendo del alta del vehículo.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Cliente buscarCliente(String dni) {
+<b class="nc">&nbsp;        for (Cliente c : clientes) {</b>
+<b class="nc">&nbsp;            if (c.getDni().equals(dni)) {</b>
+<b class="nc">&nbsp;                return c;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Vehiculo buscarVehiculo(String matricula) {
+<b class="nc">&nbsp;        for (Vehiculo v : flota) {</b>
+<b class="nc">&nbsp;            if (v.getMatricula().equals(matricula)) {</b>
+<b class="nc">&nbsp;                return v;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void listarClientes() {
+<b class="nc">&nbsp;        boolean encontrado = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Cliente c : clientes) {</b>
+<b class="nc">&nbsp;            System.out.println(c);</b>
+<b class="nc">&nbsp;            System.out.println(&quot;----------------------------------------&quot;);</b>
+<b class="nc">&nbsp;            encontrado = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!encontrado) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;No se han encontrado clientes.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void listarVehiculosDisponibles() {
+<b class="nc">&nbsp;        boolean encontrado = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Vehiculo v : flota) {</b>
+<b class="nc">&nbsp;            if (v.isDisponible()) {</b>
+<b class="nc">&nbsp;                System.out.println(v);</b>
+<b class="nc">&nbsp;                encontrado = true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (!encontrado) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;No hay vehículos disponibles&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void realizarReserva(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio, LocalDate fechaFin) {
+<b class="nc">&nbsp;        vehiculo.setDisponible(false);</b>
+<b class="nc">&nbsp;        Reserva reserva = new Reserva(cliente, vehiculo, fechaInicio, fechaFin);</b>
+<b class="nc">&nbsp;        exportarTicket(reserva);</b>
+<b class="nc">&nbsp;        guardarDatos();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void cargarDatos() {
+<b class="nc">&nbsp;        flota = gestor.cargarVehiculos();</b>
+<b class="nc">&nbsp;        clientes = gestor.cargarClientes();</b>
+<b class="nc">&nbsp;        Reserva.setNextId(gestor.calcularSiguienteIdReserva());</b>
+&nbsp;    }
+&nbsp;    public static void guardarDatos() {
+<b class="nc">&nbsp;        gestor.guardarVehiculos(flota);</b>
+<b class="nc">&nbsp;        gestor.guardarClientes(clientes);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void exportarTicket(Reserva reserva) {
+&nbsp;
+<b class="nc">&nbsp;        gestor.exportarTicket(reserva);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-04-26 19:38</div>
+</div>
+</body>
+</html>

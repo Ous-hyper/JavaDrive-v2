@@ -1,0 +1,239 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GestorPersistencia</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">logica</a>
+</div>
+
+<h1>Coverage Summary for Class: GestorPersistencia (logica)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GestorPersistencia</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package logica;
+&nbsp;
+&nbsp;import model.*;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.PrintWriter;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Scanner;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+<b class="nc">&nbsp;public class GestorPersistencia {</b>
+&nbsp;    public List&lt;Vehiculo&gt; cargarVehiculos() {
+<b class="nc">&nbsp;        List&lt;Vehiculo&gt; lista = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        try (Scanner sc = new Scanner(new File(&quot;vehiculos.txt&quot;))){</b>
+<b class="nc">&nbsp;            while (sc.hasNextLine()) {</b>
+<b class="nc">&nbsp;                String [] campos = sc.nextLine().split(&quot;;&quot;);</b>
+<b class="nc">&nbsp;                if (campos[0].equals(&quot;COCHE&quot;)) {</b>
+<b class="nc">&nbsp;                    lista.add(new Coche(campos[1], campos[2], campos[3],</b>
+<b class="nc">&nbsp;                            Boolean.parseBoolean(campos[4]), TipoCoche.valueOf(campos[5]),</b>
+<b class="nc">&nbsp;                            Integer.parseInt(campos[6])));</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    lista.add(new Furgoneta(campos[1], campos[2], campos[3],</b>
+<b class="nc">&nbsp;                            Boolean.parseBoolean(campos[4]), Boolean.parseBoolean(campos[5]),</b>
+<b class="nc">&nbsp;                            Integer.parseInt(campos[6])));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            System.out.println(&quot;Error al cargar los vehiculos&quot;);</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        return lista;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void guardarVehiculos(List&lt;Vehiculo&gt; flota) {
+&nbsp;
+<b class="nc">&nbsp;        try (PrintWriter pw = new PrintWriter(&quot;vehiculos.txt&quot;)) {</b>
+<b class="nc">&nbsp;            for (Vehiculo v : flota) {</b>
+<b class="nc">&nbsp;                if (v instanceof Coche c) {</b>
+<b class="nc">&nbsp;                    pw.println(&quot;COCHE;&quot;+c.getMatricula()+&quot;;&quot;+c.getMarca()+&quot;;&quot;+c.getModelo()+&quot;;&quot;+c.isDisponible()+&quot;;&quot;+c.getTipoCoche()+&quot;;&quot;+c.getNumPlazas());</b>
+<b class="nc">&nbsp;                } else if (v instanceof Furgoneta f) {</b>
+<b class="nc">&nbsp;                    pw.println(&quot;FURGONETA;&quot;+f.getMatricula()+&quot;;&quot;+f.getMarca()+&quot;;&quot;+f.getModelo()+&quot;;&quot;+f.isDisponible()+&quot;;&quot;+f.isEsDeCarga()+&quot;;&quot;+f.getCapacidad());</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Cliente&gt; cargarClientes() {
+<b class="nc">&nbsp;        List&lt;Cliente&gt; lista = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        try (Scanner sc = new Scanner(new File(&quot;clientes.txt&quot;))){</b>
+<b class="nc">&nbsp;            while (sc.hasNextLine()) {</b>
+<b class="nc">&nbsp;                String [] campos = sc.nextLine().split(&quot;;&quot;);</b>
+<b class="nc">&nbsp;                lista.add(new Cliente(campos[0], campos[1], campos[2]));</b>
+&nbsp;            }
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            System.out.println(&quot;Error al cargar los vehiculos&quot;);</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        return lista;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void guardarClientes(List&lt;Cliente&gt; clientes) {
+&nbsp;
+<b class="nc">&nbsp;        try (PrintWriter pw = new PrintWriter(&quot;clientes.txt&quot;)) {</b>
+<b class="nc">&nbsp;            for (Cliente c : clientes) {</b>
+<b class="nc">&nbsp;               pw.println(c.getDni()+&quot;;&quot;+c.getNombre()+&quot;;&quot;+c.getTelefono());</b>
+&nbsp;            }
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public void exportarTicket(Reserva reserva) {
+<b class="nc">&nbsp;        String carpeta = &quot;Reservas&quot;;</b>
+<b class="nc">&nbsp;        File dir = new File(carpeta);</b>
+<b class="nc">&nbsp;        if (!dir.exists()) {</b>
+<b class="nc">&nbsp;            dir.mkdirs();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String nombreArchivo = &quot;reservas_&quot;+ reserva.getIdReserva() +&quot;.txt&quot;;</b>
+<b class="nc">&nbsp;        File destino = new File(dir, nombreArchivo);</b>
+<b class="nc">&nbsp;        try (PrintWriter pw = new PrintWriter(destino)) {</b>
+<b class="nc">&nbsp;            pw.print(reserva.GenerarLineaTicket());</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Ticket generado con éxito: &quot; + destino.getPath());</b>
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            System.out.println(&quot;Error al exportar el ticket: &quot; + e.getMessage());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int calcularSiguienteIdReserva() {
+<b class="nc">&nbsp;        String carpeta = &quot;Reservas&quot;;</b>
+<b class="nc">&nbsp;        File dir = new File(carpeta);</b>
+<b class="nc">&nbsp;        if (!dir.exists()) {</b>
+<b class="nc">&nbsp;            dir.mkdirs();</b>
+<b class="nc">&nbsp;            return 1; // No había carpeta ni archivos</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int maxId = 0;</b>
+<b class="nc">&nbsp;        Pattern p = Pattern.compile(&quot;reservas_([0-9]+)\\.txt&quot;);</b>
+<b class="nc">&nbsp;        File[] files = dir.listFiles();</b>
+<b class="nc">&nbsp;        if (files != null) {</b>
+<b class="nc">&nbsp;            for (File f : files) {</b>
+<b class="nc">&nbsp;                Matcher m = p.matcher(f.getName());</b>
+<b class="nc">&nbsp;                if (m.matches()) {</b>
+&nbsp;                    try {
+<b class="nc">&nbsp;                        int id = Integer.parseInt(m.group(1));</b>
+<b class="nc">&nbsp;                        if (id &gt; maxId) maxId = id;</b>
+&nbsp;                    } catch (NumberFormatException ignore) {
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return maxId + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-04-26 19:38</div>
+</div>
+</body>
+</html>
