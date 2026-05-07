@@ -45,4 +45,16 @@ class ReservaTest {
 
         assertNotEquals(r1.getIdReserva(), r2.getIdReserva());
     }
+
+    @Test
+    void testSettersYStatic() {
+        Reserva.setNextId(100);
+        Reserva r = new Reserva(null, null, null, null);
+        assertEquals(100, r.getIdReserva());
+
+        Reserva.setNextId(-5);
+
+        r.setIdReserva(500);
+        assertEquals(500, r.getIdReserva());
+    }
 }

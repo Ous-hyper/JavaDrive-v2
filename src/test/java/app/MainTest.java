@@ -2,16 +2,38 @@ package app;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
     @Test
-    void testMainParaCoverage() {
-        assertNotNull(app.Main.sc);
+    void testMenusPrincipales() {
+        // Aqui simulamos un nuevo usuario
+        String entradaSimulada = "123\nPepe\n666\n";
+        InputStream in = new ByteArrayInputStream(entradaSimulada.getBytes());
 
-        app.Main objetoMain = new app.Main();
-        assertNotNull(objetoMain);
+        Main.sc = new java.util.Scanner(System.in);
 
+        assertDoesNotThrow(() -> Main.menuAltaCliente());
+    }
+
+    @Test
+    void testMetodosEstaticosMain() {
+        assertDoesNotThrow(() -> Main.cargarDatos());
+        assertDoesNotThrow(() -> Main.guardarTodoAlSalir());
+    }
+
+    @Test
+    void testSalirDelPrograma() {
+        String entradaSimulada = "6\n";
+        InputStream in = new ByteArrayInputStream(entradaSimulada.getBytes());
+        System.setIn(in);
+        Main.sc = new Scanner(System.in);
+
+        assertDoesNotThrow(() -> Main.main(new String[]{}));
     }
 }

@@ -31,4 +31,23 @@ class FurgonetaTest {
         });
     }
 
+    @Test
+    void testSettersYLimites() {
+        Furgoneta f = new Furgoneta("111", "Marca", "Mod", true, true, 500);
+
+        // Test de Setters
+        f.setEsDeCarga(false);
+        f.setCapacidad(7);
+
+        assertEquals(7, f.getCapacidad());
+        assertFalse(f.isEsDeCarga());
+
+        Furgoneta f2 = new Furgoneta("222", "A", "B", true, false, 2);
+        assertEquals(2, f2.getCapacidad());
+
+        assertThrows(NumPlazasException.class, () -> {
+            new Furgoneta("333", "A", "B", true, false, 1);
+        });
+    }
+
 }

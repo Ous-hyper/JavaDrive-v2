@@ -10,11 +10,11 @@ DNI: 1
 Teléfono: 1
 --------------------------------------------
 DATOS DEL VEHÍCULO: 
-Marca y Modelo: S I
-Matrícula: ABC
+Marca y Modelo: M M
+Matrícula: M
 
 Detalles: 
-Coche [Familiar]
+Coche [Pequeño]
 Nº Plazas: 5
 --------------------------------------------
 PERIODO DE ALQUILER: 
