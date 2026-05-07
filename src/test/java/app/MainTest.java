@@ -1,22 +1,35 @@
 package app;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
+    // Guardamos el System.in original para restaurarlo después
+    private final InputStream originalIn = System.in;
+
+    @AfterEach
+    void restaurarSistema() {
+        System.setIn(originalIn);
+        Main.sc = new Scanner(System.in);
+    }
+
     @Test
     void testMenusPrincipales() {
-        // Aqui simulamos un nuevo usuario
+        // ✅ Ahora SÍ redirigimos System.in correctamente
         String entradaSimulada = "123\nPepe\n666\n";
-        InputStream in = new ByteArrayInputStream(entradaSimulada.getBytes());
-
-        Main.sc = new java.util.Scanner(System.in);
+        ByteArrayInputStream in = new ByteArrayInputStream(entradaSimulada.getBytes());
+        System.setIn(in);                    // ← esto faltaba
+        Main.sc = new Scanner(System.in);    // ← ahora lee del fake input
 
         assertDoesNotThrow(() -> Main.menuAltaCliente());
     }
@@ -28,9 +41,11 @@ class MainTest {
     }
 
     @Test
+    @Timeout(value = 5, unit = TimeUnit.SECONDS) // ✅ Evita bucle infinito
     void testSalirDelPrograma() {
+        // Pon aquí el número real de la opción "Salir" de tu menú
         String entradaSimulada = "6\n";
-        InputStream in = new ByteArrayInputStream(entradaSimulada.getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream(entradaSimulada.getBytes());
         System.setIn(in);
         Main.sc = new Scanner(System.in);
 

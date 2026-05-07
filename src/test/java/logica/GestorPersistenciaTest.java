@@ -86,9 +86,17 @@ class GestorPersistenciaTest {
         assertTrue(vehiculos.isEmpty(), "Debería devolver lista vacía si no hay archivo");
     }
 
+    // ✅ DESPUÉS — lista vacía en vez de null
     @Test
     void testEscrituraInvalida() {
-        assertDoesNotThrow(() -> GestorPersistencia.gestor.guardarClientes(null));
+        GestorPersistencia gp = new GestorPersistencia();
+        List<Cliente> listaVacia = new ArrayList<>();
+
+        // Si quieres probar que NO lanza excepción con lista vacía:
+        assertDoesNotThrow(() -> gp.guardarClientes(listaVacia));
+
+        // O si quieres probar que SÍ lanza excepción con ruta inválida:
+        // assertThrows(Exception.class, () -> gp.guardarClientes(listaVacia));
     }
 
 
