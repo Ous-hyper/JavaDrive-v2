@@ -1,3 +1,2 @@
-1;A;1
 DNINUEVO;NombreTest;600111222
 RES001;ClienteTest;600

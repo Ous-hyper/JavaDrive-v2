@@ -1,17 +1,17 @@
 ============================================
  CONTRATO DE ALQUILER - JAVADRIVE
 ============================================
-ID RESERVA: 2
+ID RESERVA: 7
 FECHA EMISIÓN: 2026-05-13
 --------------------------------------------
 DATOS DEL CLIENTE:
-Nombre: A
-DNI: 1
-Teléfono: 1
+Nombre: ClienteTest
+DNI: RES001
+Teléfono: 600
 --------------------------------------------
 DATOS DEL VEHÍCULO: 
-Marca y Modelo: X X
-Matrícula: M1
+Marca y Modelo: Seat Ibiza
+Matrícula: RESMAT1
 
 Detalles: 
 Coche [Pequeño]
@@ -19,7 +19,7 @@ Nº Plazas: 5
 --------------------------------------------
 PERIODO DE ALQUILER: 
 Fecha de recogida: 2026-05-13
-Fecha de devolución: 2026-05-18
-Total días: 5
+Fecha de devolución: 2026-05-16
+Total días: 3
 --------------------------------------------
 ESTADO: Confirmado y Pendiente de pago
